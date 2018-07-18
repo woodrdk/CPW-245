@@ -1,15 +1,11 @@
 import java.io.File;
 import java.util.Scanner;
 import java.util.*;
-
 // Robert Wood Jr
 // 7/16/18
 // CPW 245
-// Programming Assignment #2
-// Stack & Queue
-//
-// This assignment will reinforce your understanding of Stacks.
-// It will calculate size of files in a directory.
+// Assignment #2 Stack & Queue
+// This assignment will calculate size of files in a directory.
 
 public class DirectorySize {
     public static void main( String[] args ) {
@@ -27,7 +23,6 @@ public class DirectorySize {
     
     public static long getSizeRecursive( File file ) {
         long size = 0;
-        
         if ( file.isDirectory() ) {
             File[] files = file.listFiles();
             for ( int i = 0; files != null && i < files.length; i++ ) {
@@ -37,36 +32,54 @@ public class DirectorySize {
         else {
             size += file.length();
         }
-        
         return size;
     }
     
     public static long getSizeStack( File file ) {
        
-        Stack<Integer> FileStack = new Stack<Integer>();
+        Stack<File> FileStack = new Stack<File>();
         long size = 0;
-        File[] files = file.listFiles();
-        for(int i = 0; i < files.length; i++){
-           FileStack.push(files[i]); // addd dir to stack
+        File[] stackFiles = file.listFiles();
+        for(int i = 0; i < stackFiles.length; i++){
+           FileStack.push(stackFiles[i]); 
         }
-        while(!FileStack.empty()){
-            File temp = FileStack.pop();// remove item from stack into temp
-            if(temp.isfile()){
-               size += temp.length;
+        
+        while(!FileStack.isEmpty()){
+            File temp = FileStack.pop();
+            if(temp.isFile()){
+               size += temp.length();
             }            
             else{
-               // add all the files and subdirectories under the temp into the stack
-            }
+               File [] leftOvers = temp.listFiles();
+               for(int z = 0; z < leftOvers.length; z++){
+                  FileStack.push(leftOvers[z]);
+               }
+            }           
         }
         return size;
         
 }
     
     public static long getSizeQueue( File file ) {
+        Queue<File> FileQueue = new LinkedList<File>();
         long size = 0;
+        File[] queueFiles = file.listFiles();
+        for(int i = 0; i < queueFiles.length; i++){
+           FileQueue.add(queueFiles[i]);
+        }
         
-        // TODO: implement method from Handout
-        
+        while(!FileQueue.isEmpty()){
+            File temp = FileQueue.remove();
+            if(temp.isFile()){
+               size += temp.length();
+            }            
+            else{
+               File [] qLeftOvers = temp.listFiles();
+               for(int z = 0; z < qLeftOvers.length; z++){
+                  FileQueue.add(qLeftOvers[z]);
+               }
+            }           
+        }
         return size;
     }
 }
