@@ -37,37 +37,28 @@ public class DirectorySize {
     
     public static long getSizeStack( File file ) {
        
-        Stack<File> FileStack = new Stack<File>();
+        Stack<File> fileStack = new Stack<File>();
         long size = 0;
-        File[] stackFiles = file.listFiles();
-        for(int i = 0; i < stackFiles.length; i++){
-           FileStack.push(stackFiles[i]); 
-        }
-        
-        while(!FileStack.isEmpty()){
-            File temp = FileStack.pop();
+        fileStack.push(file);
+        while(!fileStack.isEmpty()){
+            File temp = fileStack.pop();
             if(temp.isFile()){
                size += temp.length();
             }            
             else{
                File [] leftOvers = temp.listFiles();
                for(int z = 0; z < leftOvers.length; z++){
-                  FileStack.push(leftOvers[z]);
+                  fileStack.push(leftOvers[z]);
                }
             }           
         }
         return size;
-        
 }
     
     public static long getSizeQueue( File file ) {
         Queue<File> FileQueue = new LinkedList<File>();
         long size = 0;
-        File[] queueFiles = file.listFiles();
-        for(int i = 0; i < queueFiles.length; i++){
-           FileQueue.add(queueFiles[i]);
-        }
-        
+        FileQueue.add(file);
         while(!FileQueue.isEmpty()){
             File temp = FileQueue.remove();
             if(temp.isFile()){
