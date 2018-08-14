@@ -25,7 +25,7 @@ public class WindowsTester extends MouseInputAdapter {
         olr.addRect( new ColorRectangle( 40, 40, 200, 300, Color.RED  ) );
         olr.addRect( new ColorRectangle( 100, 60, 200, 300, Color.BLUE ) );
         olr.addRect( new ColorRectangle( 25, 200, 200, 300, Color.YELLOW ) );
-        olr.addRect( new ColorRectangle( 200, 100, 200, 300, Color.GREEN ) );
+        //olr.addRect( new ColorRectangle( 200, 100, 200, 300, Color.GREEN ) );
         //olr.addRect( new ColorRectangle( 275, 50, 200, 300, Color.GRAY ) );
         //olr.addRect( new ColorRectangle( 300, 25, 200, 300, Color.CYAN ) );
         

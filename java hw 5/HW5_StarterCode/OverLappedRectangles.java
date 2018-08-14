@@ -56,12 +56,31 @@ public class OverLappedRectangles {
     public void moveToTop( Point p ) {
 
         RectangleNode current = bottom;
+        System.out.print(size());   // prints the size of the linked list for testing
+         
+    //    int moveThis = -1;
+  //      for(int i = 0 ; i < size(); i++){
+//           if(isInside( current.rect, p )){
+          //      current = current.next;
+        //        
+      //     }
+    //       moveThis = i; 
+  //      }
+//        if(moveThis >= 0){
+            //bottom = current;
+             //   add(current.rect);
+
+       // }
         
-        if(isInside( current.rect, p )){
-           bottom = current.next;
-           add(current.rect);
+        
+        while(current.next != null){
+         if(isInside( current.rect, p )){
+                
+                add(current.rect);     
+         }
+         current = current.next;
         }
-            
+         
 
         // TODO: Your code goes here.
         // You can use the ideas from Chpater 16, in particular the index code can be adapted to this problem by adding some methods to this OverLappedRectangles class. 
