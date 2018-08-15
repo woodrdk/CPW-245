@@ -56,29 +56,38 @@ public class OverLappedRectangles {
     public void moveToTop( Point p ) {
 
         RectangleNode current = bottom;
-        System.out.print(size());   // prints the size of the linked list for testing
+       // System.out.print(size());   // prints the size of the linked list for testing
 
         RectangleNode clicked = null;
         
+        // following code determines which rectangle is clicked
         while(current.next != null){
-   //      if(bottom== null){
-   //       bottom = current;
-   //      }
-         
-         
-         if(isInside( current.rect, p )){
-             clicked = current;
-             //clicked.next = null;
-         }
-         current = current.next;
-
+            if(isInside( current.rect, p )){
+                clicked = current;
+             
+            }
+            current = current.next;
         }
-        if(current.next == null){
-          current.next = clicked;
-            
-        } 
-         
-              
+        // following code removes the clicked rectangle
+        
+        current = bottom;
+        while(current.next != null){
+            if(current.next == clicked){
+                current.next = current.next.next; 
+                if(current.next == null){
+                  current.next = clicked;
+                   clicked.next = null;
+              }
+            }
+            current = current.next;
+        }
+        
+//      clicked.next = null;// no work
+       // if(current.next == null){
+        //    current.next = clicked;
+        //  clicked.next = null;
+       /// }
+           
     }
    
     /**
