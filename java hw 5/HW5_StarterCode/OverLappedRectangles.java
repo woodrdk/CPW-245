@@ -20,7 +20,8 @@ import java.util.*;
  *
  * @author Robert Wood Jr
  * @version CPW 245 Summer 2018 Programming Assignment 5
- *
+ * Made the move to top code allow to move a rectangle to the top
+ * If it was clicked and not the bottommost rectangle.
  */
 
 public class OverLappedRectangles {
@@ -55,32 +56,32 @@ public class OverLappedRectangles {
      */
     public void moveToTop( Point p ) {
 
-        RectangleNode current = bottom;
-       // System.out.print(size());   // prints the size of the linked list for testing
+        RectangleNode current = bottom;            // sets the current to bottom
+        RectangleNode clicked = null;              // initializes clicked with no contents
+        
+                   // following code determines which rectangle is clicked
+        while(current.next != null){               // if current .next is not null then keep doing 
+            if(isInside( current.rect, p )){       // if the mouse is clicked inside the rectangle
+                clicked = current;                 // the clicked list  = current list
+            }                                      // closes the if
+            current = current.next;                // increments current to the next current
+        }                                          // closes loop
+                  // following code removes the clicked rectangle
+        
+        current = bottom;                          // sets current to the bottom
+        while(current.next != null){               // while current.next is not null
+            if(current.next == clicked){           // if current.next is equal to clicked
+                current.next = current.next.next;  // current.next skips the next and equals .next.next
+                 clicked.next = null;              // cuts off the clicked nodes past the current
+            }                                      // closes if   
+            current = current.next;                // increments current to the next current
+         }                                         // closes loop
 
-        RectangleNode clicked = null;
+        if(current.next == null){                  // if current next is null 
+            current.next = clicked;                // make current.next the clicked node
+        }                                          // closes if
         
-        // following code determines which rectangle is clicked
-        while(current.next != null){
-            if(isInside( current.rect, p )){
-                clicked = current;
-             
-            }
-            current = current.next;
-        }
-        // following code removes the clicked rectangle
         
-        current = bottom;
-        while(current.next != null){
-            if(current.next == clicked){
-                current.next = current.next.next; 
-                if(current.next == null){
-                  current.next = clicked;
-                   clicked.next = null;
-              }
-            }
-            current = current.next;
-        }
         
 //      clicked.next = null;// no work
        // if(current.next == null){
@@ -150,7 +151,11 @@ public class OverLappedRectangles {
     
     
     ///////////////////////////////////////////////////////////
-    
+      /**
+     * Checks to see if the point is inside the rectangle
+     * uses Point P and the coordinates of ColorRectangle
+     *
+     */
     public boolean isInside( ColorRectangle r , Point p ) {
       return r.getX() <= p.getX()&& p.getX()
           <= r.getX() + r.getWidth()&& r.getY() 
@@ -158,45 +163,6 @@ public class OverLappedRectangles {
           <= r.getY() + r.getHeight();
     }
     
-    
-    public void add(ColorRectangle rect){
-        if( bottom == null){
-            bottom = new RectangleNode(rect);
-        }
-        else{
-            RectangleNode current = bottom;
-            while(current.next != null){
-               current = current.next;
-            }
-            current.next = new RectangleNode(rect);
-        }
-    }
-    
-    public void remove(int index){
-        if(index == 0){
-            bottom = bottom.next;
-        }
-        else{
-            RectangleNode current = nodeAt(index-1);
-            current.next = current.next.next;
-        }
-    }
-    
-    public RectangleNode nodeAt(int index){
-         RectangleNode current = bottom;
-         for(int i = 0; i < index; i++){
-            current= current.next;
-         }
-         return current;
-    }
-    
-    public int size(){
-      int count = 0;
-      RectangleNode current= bottom;
-      while(current != null){
-         current = current.next;
-         count++;
-      }
-      return count;
+   
     }
 }
