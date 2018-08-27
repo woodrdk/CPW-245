@@ -1,3 +1,5 @@
+
+
 public class CPW245_FinalExam {
     public static void main( String[] args ) {
         LinkedIntList a = new LinkedIntList();

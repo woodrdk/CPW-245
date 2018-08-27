@@ -1,5 +1,7 @@
 // Simple first version of LinkedIntList with just a constructor
 // and methods for add and toString.
+import java.io.*;
+import java.util.LinkedList;
 
 public class LinkedIntList {
     private ListNode front;  // first value in the list
@@ -42,14 +44,8 @@ public class LinkedIntList {
         ListNode listA = front;
         ListNode listB = b.front;
         
-        LinkedIntList c = b; //b;
+        LinkedIntList c = b;
         ListNode listC = c.front;
-        // do a while loop and add b data to c that way?
- //       while(listB != null){
- //           listC.data = listB.data;
- //           listB = listB.next;
- //       }
-
 
         if(listB == null){
             return null;
@@ -63,18 +59,16 @@ public class LinkedIntList {
                
                if(listB.data > 10 ){
                   listB.data = listB.data % 10;
-                  carry = 1; 
+                  carry = listB.data / 10;; 
                }
                else{
-                  carry = 0;
+                  carry = listB.data / 10;
                }
                listA = listA.next;
                listB = listB.next;
-               listC = listC.next;
+               //listC = listC.next;
             }
         }
-        
         return c;
     }
-    
 }

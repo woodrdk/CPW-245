@@ -2,15 +2,17 @@ import java.util.*;
 
 public class MinStack {
     private ArrayList<Integer> data;
-    private ArrayList<Integer> min;    
-    private int minVal = 10000;
+    private ArrayList<Integer> min;      // added
+    private Integer minVal;// = 10000;          // added
     public MinStack() {
         data = new ArrayList<Integer>();
-        min = new ArrayList<Integer>();
+        min = new ArrayList<Integer>();  // added
     }
     
     public void push( int a ) {
-        
+        if(minVal == null){
+            minVal = a;
+        }
         data.add( a );
         // added this code
         if(a < minVal){
