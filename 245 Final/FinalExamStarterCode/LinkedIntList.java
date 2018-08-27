@@ -43,30 +43,49 @@ public class LinkedIntList {
     public LinkedIntList add( LinkedIntList b ) {
         ListNode listA = front;
         ListNode listB = b.front;
-        
-        LinkedIntList c = b;
+        LinkedIntList c = new LinkedIntList();
         ListNode listC = c.front;
+
 
         if(listB == null){
             return null;
         }
         else{
             int carry = 0;
-            while(listA != null){ // change the listB to ListC.data 
-//             need to  stop altering B
-               listB.data = (listA.data + listB.data + carry);
-               //listC.data = add(listA.data + listB.data + carry);
+            while(listA != null || listB != null){
+               int a;
+               if(listA == null){
+                  a = 0;}
+               else{
+                  a = listA.data;
+                  listA = listA.next;
+               }
+               int numb;
+               if(listB == null){
+                  numb = 0;}
+               else{
+                  numb = listB.data;
+                  listB = listB.next;
+               }
                
-               if(listB.data > 10 ){
-                  listB.data = listB.data % 10;
-                  carry = listB.data / 10;; 
+               int num = a + numb + carry; //(listA.data + listB.data + carry);
+               
+               
+               if(num > 10){
+                  carry = num / 10;
+                  num = num % 10;
+                 
                }
                else{
-                  carry = listB.data / 10;
+                  carry = num / 10;
                }
-               listA = listA.next;
-               listB = listB.next;
-               //listC = listC.next;
+                     
+               if(listC == null){
+                  c.add(num);                
+               }
+
+//               listA = listA.next;
+//               listB = listB.next;
             }
         }
         return c;
