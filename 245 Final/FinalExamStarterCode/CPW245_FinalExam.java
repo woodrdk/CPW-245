@@ -24,25 +24,26 @@ public class CPW245_FinalExam {
         System.out.println( c );
         
         
-        // MinStack stack = new MinStack();
-        // stack.push( 7 );
-        // stack.push( 5 );
-        // stack.push( 8 );
-        // stack.push( 3 );
-        // stack.push( 6 );
-        // stack.push( 2 );
+        MinStack stack = new MinStack();
+        stack.push( 7 );
+        stack.push( 5 );
+        stack.push( 8 );
+        stack.push( 3 );
+        stack.push( 6 );
+        stack.push( 2 );
         
-        // System.out.println();
-        // System.out.println( "MinStack Test:" );
-        // while( !stack.isEmpty() ) {
-        //    int min = stack.min();
-        //    int data = stack.pop();
+        System.out.println();
+        System.out.println( "MinStack Test:" );
+        while( !stack.isEmpty() ) {
+           int min = stack.min();
+           int data = stack.pop();
             
-       //     System.out.println( "value = " + data 
-       //                       + ", min = " + min );
-       // }
+           System.out.println( "value = " + data + ", min = " + min );
+       }
         
         
+        
+       // -----------------------------------------------------------------------------------------------------------------------------------------------
        // EXTRA CREDIT 
        // Algoritm to make a binary tree from a sorted array
        
